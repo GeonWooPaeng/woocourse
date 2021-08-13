@@ -64,9 +64,11 @@ function PrintAllStrike($result) {
 }
 
 function ResetPage() {
+  const $user_input = document.getElementById('user-input');
   const $result = document.getElementById('result');
 
-  $result.value = '';
+  $user_input.value = '';
+  $result.innerHTML = '';
 }
 
 function CheckValue($result, comNums, nums) {
@@ -101,7 +103,7 @@ function PlayGame(comNums) {
     CheckValue($result, comNums, nums);
     $result.addEventListener('click', ({ target }) => {
       if (target.id === 'restart') {
-
+        ResetPage();
       }
     })
   })
