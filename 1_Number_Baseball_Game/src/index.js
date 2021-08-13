@@ -71,9 +71,22 @@ function ResetPage() {
   $result.innerHTML = '';
 }
 
-function CheckValue($result, comNums, nums) {
-  let strike = GetStrikeNum(comNums, nums);
+function PrintBallStrike($result, ball, strike) {
+  if (ball && !strike) {
+    //ball만 있는 경우
+    $result.innerText = `${ball}볼`;
+  }
+  else if (!ball && strike) {
+    $result.innerText = `${strike}스트라이크`;
+  }
+  else {
+    $result.innerText = `${ball}볼 ${strike}스트라이크`;
+  }
+}
+
+function CheckBallStrike($result, comNums, nums) {
   let ball = GetBallNum(comNums, nums);
+  let strike = GetStrikeNum(comNums, nums);
 
   if (strike === 0 && ball === 0) {
     //innerText, textContent 차이점
@@ -85,35 +98,51 @@ function CheckValue($result, comNums, nums) {
     return ;
   }
   else {
-    //ball, strike 나타내기
+    PrintBallStrike($result, ball, strike);
   }
 }
 
-function PlayGame(comNums) {
+function CheckPersonNums(nums) {
+  let numsSet = new Set(nums);
+
+  if (numsSet.size === 3) {
+    return true;
+  }
+  return false;
+}
+
+function PlayGame(comNums, nums) {
   // 태그가 반복 되는 것이 아닙니다.
   const $submit = document.getElementById('submit');
   const $result = document.getElementById('result');
 
   $submit.addEventListener('click', () => {
-    let nums = GetPersonNums();
-    let strike = GetStrikeNum(comNums, nums);
-    let ball = GetBallNum(comNums, nums);
+    nums = GetPersonNums();
 
+    if (!CheckPersonNums(nums)) {
+      window.alert('문자를 잘못 입력했습니다.');
+      $result.innerText = '';
+    }
+    else {
+      let strike = GetStrikeNum(comNums, nums);
+      let ball = GetBallNum(comNums, nums);
+      CheckBallStrike($result, comNums, nums);
+    }
     console.log(comNums);
-    CheckValue($result, comNums, nums);
-    $result.addEventListener('click', ({ target }) => {
-      if (target.id === 'restart') {
-        ResetPage();
-      }
-    })
+  })
+  $result.addEventListener('click', ({ target }) => {
+    if (target.id === 'restart') {
+      comNums = GetComRandomNum();
+      ResetPage();
+    }
   })
 }
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    return PlayGame(computerInputNumbers, userInputNumbers);
   };
-  PlayGame(GetComRandomNum());
+  this.play(GetComRandomNum(), GetPersonNums());
 }
 
 // export default class BaseballGame {
