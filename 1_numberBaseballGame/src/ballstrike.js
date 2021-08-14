@@ -6,7 +6,7 @@ function GetBallNum(comNums, nums) {
       return acc;
     }, 0);
   }
-  
+
 function GetStrikeNum(comNums, nums) {
   return nums.reduce((acc, val, idx) => {
     if (val === comNums[idx]) {
