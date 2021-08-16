@@ -9,7 +9,7 @@ function CheckCarName(carName) {
     return (0);
   }  
 
-export default function InputCarName($tryContainer) {
+export default function InputCarName($tryContainer, $result) {
     const $nameContainer = document.querySelector(".car-game-container").childNodes[1];
     const $nameBtn = $nameContainer.childNodes[3];
     const $nameText = $nameContainer.childNodes[1];
@@ -22,7 +22,7 @@ export default function InputCarName($tryContainer) {
       }
       else {
         $tryContainer.style.visibility = 'visible';
-        InputTryNum($tryContainer, carName);
+        InputTryNum($tryContainer, $result, carName);
       }
     });
   }

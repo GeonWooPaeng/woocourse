@@ -9,7 +9,7 @@ function PlayGame() {
   const $result = document.querySelector("#app").childNodes[7];
   
   PageInit($tryContainer, $result);
-  InputCarName($tryContainer);
+  InputCarName($tryContainer, $result);
 }
 
 function PageInit($tryContainer, $result) {
