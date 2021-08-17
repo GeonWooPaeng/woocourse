@@ -18,7 +18,6 @@ function PageInit($tryContainer, $result) {
   $result.style.visibility = 'hidden';
 }
 
-
 export default function RacingCarGame() {
   PlayGame();
 }

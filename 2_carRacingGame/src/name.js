@@ -9,6 +9,17 @@ function CheckCarName(carName) {
     return (0);
   }  
 
+function Car(name) {
+  this.name = name;
+}
+function makeNewCars(carName) {
+  const carList = carName.map((car) => new Car(car));
+  
+  carList.forEach((car) => car.count = 0);
+
+  return carList;
+}
+
 export default function InputCarName($tryContainer, $result) {
     const $nameContainer = document.querySelector(".car-game-container").childNodes[1];
     const $nameBtn = $nameContainer.childNodes[3];
@@ -22,7 +33,8 @@ export default function InputCarName($tryContainer, $result) {
       }
       else {
         $tryContainer.style.visibility = 'visible';
-        InputTryNum($tryContainer, $result, carName);
+        let carList = makeNewCars(carName);
+        InputTryNum($tryContainer, $result, carList);
       }
     });
   }

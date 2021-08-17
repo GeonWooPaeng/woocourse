@@ -1,39 +1,50 @@
-function GetMove() {
-    let move = Math.floor(Math.random() * 9) + 1;
-    let moveCheck = 0;
-
-    if (move > 3) {
-        moveCheck = 1;
-    }
-    return moveCheck 
+function GetMove(carList) {
+    
+    carList.map((car) => {
+        let move = Math.floor(Math.random() * 9) + 1;
+        if (move > 3)
+            car.count += 1;
+    });
 }
 
-function PrintResult($result, carName) {
-    $result.style.visibility = 'visible';
-    let carNum = carName.length;
-    let i = 0;
-    let moveCheck;
+function FindMaxMove(carList) {
+    let max = 0;
 
-    while (i < carNum) {
-        moveCheck = GetMove();
-        //innerAdjacentHTML(position, )
-        $result.insertAdjacentHTML('beforeend', `</br> ${carName[i]}: `);
-        if (moveCheck) {
-            $result.insertAdjacentHTML('beforeend', '-');
-        }
-        // else {
-        //     $result.insertAdjacentHTML('beforeend', `</br> ${carName[i]}: `);
-        // }
-        i += 1;
-    }
-    $result.innerHTML += `</br>`;
+    carList.map((car) => {
+        if (car.count > max)
+            max = car.count;
+    });
+    return max;
 }
 
-export default function GetResult($result, carName, carTry) {
+function PrintResultProcess($result, carList) {
+    carList.map((car) => {
+        $result.insertAdjacentHTML('beforeend', `${car.name}: ${'-'.repeat(car.count)}<br>`,
+        );
+    });
+    $result.insertAdjacentHTML('beforeend', `<br>`);
+}
+
+function PrintResult($result, carList) {
+    let maxCnt = FindMaxMove(carList);
+    let carResult = [];
+
+    carList.map((car) => {
+        if (car.count === maxCnt)
+            carResult.push(car.name);
+    });
+    carResult = carResult.join(' ');
+    $result.insertAdjacentHTML('beforeend', `<div>최종우승자: ${carResult} </div>`);
+}
+
+export default function GetResult($result, carList, carTry) {
     let i = 0;
 
     while (i < carTry) {
-        PrintResult($result, carName);
+        $result.style.visibility = 'visible';
+        GetMove(carList);
+        PrintResultProcess($result, carList);
         i += 1;
     }
+    PrintResult($result, carList);
 }
