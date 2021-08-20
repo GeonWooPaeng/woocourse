@@ -6,3 +6,4 @@ export default function prepareGame(carList) {
     $racingCountSubmit.closest('div').removeAttribute('hidden');
     $racingCountSubmit.addEventListener('click', () => getRacingCount(carList));
 }
+

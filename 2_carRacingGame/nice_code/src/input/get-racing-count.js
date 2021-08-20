@@ -16,3 +16,6 @@ export default function getRacingCount(carList) {
     }
     return alert('잘못 된 입력입니다.! 0이상의 숫자만 입력 가능합니다.');
 }
+
+
+

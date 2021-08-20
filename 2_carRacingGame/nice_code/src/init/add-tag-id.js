@@ -6,4 +6,3 @@ export default function addTagID() {
     $carGameContainer.querySelector('div:last-child > input').id = 'racing-count-input';
     $carGameContainer.querySelector('div:last-child > button').id = 'racing-count-submit';
 }
-
