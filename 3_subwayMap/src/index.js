@@ -57,7 +57,7 @@ function errorStationName(errorCnt) {
 function checkStationName($subway, stationName) {
     let key;
 
-    for (key of Object.keys($subway.stationNames)) {
+    for (key of Object.keys($subway.stations)) {
         if (key === stationName) {
             return (1);
         }
@@ -68,33 +68,34 @@ function checkStationName($subway, stationName) {
     return (0);
 }
 
-function printStationList($station) {
+function printStationList($subway) {
     //객체({}) -> 배열([])사용
     // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Errors/is_not_iterable
+    const $station = document.querySelector('#app > .station');
 
-    for (let [key, value] of Object.entries($station)) {
-        
+    let key;
+
+    for (key of Object.keys($subway.stations)) {
+        $station.
     }
 }
 
-function printStationListTitle($station) {
+function printStationListTitle($title) {
+    const $station = $title.querySelector('.station');
+
     $station.insertAdjacentHTML('beforeend',
                                 `<br/>
-                                    <table border="1">
-                                        <th><strong> 역 이름 </strong></th>
-                                        <th><strong> 설정 </strong></th>
-                                    </table>
+                                    <div>
+                                        <h2> 지하철 역 목록 </h2>
+                                        <table border="1">
+                                            <th><strong> 역 이름 </strong></th>
+                                            <th><strong> 설정 </strong></th>
+                                        </table>
+                                    </div>
                                 `);
 }
 
-function addInputList($station, $stationNames, $stationName) {
-    $station.insertAdjacentHTML('beforeend', 
-                                `
-                                `)
-}
-
 function getStationData($subway) {
-    const $station = document.querySelector('#app > .station');
     const $stationNameInput = document.querySelector('#station-name-input');
     const $stationAddBtn = document.querySelector('#station-add-button');
 
@@ -106,36 +107,40 @@ function getStationData($subway) {
             $stationNameInput.value = '';
         }
         else {
-            $subway['stationNames'][stationName] = `${stationName}`;
-            console.log($subway['stationNames']);
-            // printStationListTitle($station);
-            // addInputList($station, $stationNames, stationName);
+            $subway.stations[stationName] = `${stationName}`;
+            printStationList($subway);
         }
     })
 }
 
-function stationHtml() {
+function stationHtml($subway) {
     const $title = document.querySelector('#app');
 
     $title.insertAdjacentHTML('beforeend', 
             `<div class="station" >
-                <strong> 역 이름 </strong>
-                <br/>
-                <input type="text" id="station-name-input" 
-                    placeholder="역 이름을 입력해주세요">
-                <button id="station-add-button">역 추가</button>
-                <br/>
-                <h2> 지하철 역 목록 </h2>
+                <div>
+                    <strong> 역 이름 </strong>
+                    <br/>
+                    <input type="text" id="station-name-input" 
+                        placeholder="역 이름을 입력해주세요">
+                    <button id="station-add-button">역 추가</button>
+                </div>
             </div>`
         );
+    printStationListTitle($title);
+    printStationList($subway);
     setStationHidden();
 }
 
 export default function subwayMap() {
-    let $subway = {};
+    let $subway = {
+        stations: {},
+        lines: {},
+        sections: {}
+    };
     makeMenuBtn();
     menuBtnClick();
-    stationHtml();
+    stationHtml($subway);
     getStationData($subway);
 }
 
