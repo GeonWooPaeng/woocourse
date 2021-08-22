@@ -1,3 +1,5 @@
+//$ 사용이유: 함수랑 변수를 구별하기 위함입니다.
+// jquery를 의미한다고 하지만 이러한 이유로 사용한 것이 아닙니다.
 
 function makeMenuBtn() {
     const $title = document.querySelector('#app');
@@ -124,26 +126,24 @@ function getStationData($subway) {
     })
 }
 
-function deleteStationData() {
-  const $table = document.querySelector('#station-table');
-  const $trs = $table.querySelectorAll('tbody');
-  // const $deleteBtn = document.querySelectorAll('.station-delete-button');
-  let idx;
+function deleteStationList($subway) {
+  const $stationTable = document.querySelector('#station-table');
+  const $stationTableLists = $stationTable.querySelectorAll('tbody');
 
-  // console.log($deleteBtn[0].parentNode.sibli);
-  // for (idx = 0; idx < $deleteBtn.length; idx++) {
-  //   $deleteBtn[idx].addEventListener('click', ({ target }) => {
-  //     console.log(target.parentNode.parentNode);
-  //   })
-  // }
-  $trs.forEach(( $tr, idx )=>{
-    const $deleteBtn = $tr.querySelector('button');
+  $stationTableLists.forEach(($list, idx) => {
+    const $deleteBtn = $list.querySelector('button');
+    console.log($list);
     if ($deleteBtn !== null) {
-      console.log($tr);
-      $deleteBtn.addEventListener('click', () => {$table.deleteRow(idx)});
+      $deleteBtn.addEventListener('click', () => {
+        let deleteStationName = $list.querySelector('td:first-child').innerHTML;
+        console.log(deleteStationName);
+        $stationTable.deleteRow(idx);
+        delete $subway.stations[deleteStationName];
+        console.log($subway);
+      });
     }
-    // $tr.querySelector('button').addEventListener('click', $tr.remove())
   })
+
 }
 
 function stationHtml($subway) {
@@ -172,7 +172,7 @@ export default function subwayMap() {
     menuBtnClick();
     stationHtml($subway);
     getStationData($subway);
-    deleteStationData();
+    deleteStationList($subway);
 }
 
 new subwayMap();
