@@ -1,13 +1,12 @@
 function makeMenuBtn() {
     const $title = document.querySelector('#app');
 
-    $title.innerHTML += `<br/>
-                            <div class="menu-button">
-                                <button id="station-manager-button">1. 역 관리</button>
-                                <button id="line-manager-button">2. 노선 관리</button>
-                                <button id="section-manager-button">3. 구간 관리</button>
-                                <button id="map-print-manager-button">4. 지하철 노선도 출력</button>
-                            </div> 
+    $title.innerHTML += `
+                        <div class="menu-button">
+                            <button id="station-manager-button">1. 역 관리</button>
+                            <button id="line-manager-button">2. 노선 관리</button>
+                            <button id="section-manager-button">3. 구간 관리</button>
+                            <button id="map-print-manager-button">4. 지하철 노선도 출력</button>
                         <br/>`
 }
 
@@ -71,12 +70,16 @@ function checkStationName($subway, stationName) {
 function printStationList($subway) {
     //객체({}) -> 배열([])사용
     // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Errors/is_not_iterable
-    const $station = document.querySelector('#app > .station');
-
+    const $stationTable = document.querySelector('.station > div:last-child > table');
     let key;
 
     for (key of Object.keys($subway.stations)) {
-        $station.
+        $stationTable.insertAdjacentHTML('beforeend',
+                                      `
+                                      <tr>
+                                        <td>${key}</td>
+                                        <td><button class="station-delete-button"> 삭제 </button>
+                                      </tr>`);
     }
 }
 
@@ -84,15 +87,24 @@ function printStationListTitle($title) {
     const $station = $title.querySelector('.station');
 
     $station.insertAdjacentHTML('beforeend',
-                                `<br/>
-                                    <div>
-                                        <h2> 지하철 역 목록 </h2>
-                                        <table border="1">
-                                            <th><strong> 역 이름 </strong></th>
-                                            <th><strong> 설정 </strong></th>
-                                        </table>
-                                    </div>
-                                `);
+                                `<div>
+                                    <h2> 지하철 역 목록 </h2>
+                                    <table border="1">
+                                        <th><strong> 역 이름 </strong></th>
+                                        <th><strong> 설정 </strong></th>
+                                    </table>
+                                </div>`);
+}
+
+function addStationList(stationName) {
+  const $stationTable = document.querySelector('.station > div:last-child > table');
+
+  $stationTable.insertAdjacentHTML('beforeend',
+                              `<tr>
+                                <td>${stationName}</td>
+                                <td><button class="station-delete-button"> 삭제 </button></td>
+                              </tr>`
+                              )
 }
 
 function getStationData($subway) {
@@ -108,7 +120,7 @@ function getStationData($subway) {
         }
         else {
             $subway.stations[stationName] = `${stationName}`;
-            printStationList($subway);
+            addStationList(stationName);
         }
     })
 }
@@ -117,18 +129,15 @@ function stationHtml($subway) {
     const $title = document.querySelector('#app');
 
     $title.insertAdjacentHTML('beforeend', 
-            `<div class="station" >
-                <div>
-                    <strong> 역 이름 </strong>
-                    <br/>
+                `<div class="station" >
+                    <div><strong> 역 이름 </strong></div>
                     <input type="text" id="station-name-input" 
                         placeholder="역 이름을 입력해주세요">
                     <button id="station-add-button">역 추가</button>
-                </div>
-            </div>`
+                </div>`
         );
     printStationListTitle($title);
-    printStationList($subway);
+    printStationList($subway, $title);
     setStationHidden();
 }
 
