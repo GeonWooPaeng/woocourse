@@ -1,3 +1,4 @@
+
 function makeMenuBtn() {
     const $title = document.querySelector('#app');
 
@@ -21,7 +22,6 @@ function menuBtnClick() {
         }
         // else if (target.id === 'line-manager-button') {
         //     //line part
-        //     console.log('asdff');
         // }
         // else if (target.id === 'section-manager-button') {
         //     //section part
@@ -71,13 +71,12 @@ function printStationList($subway) {
     //객체({}) -> 배열([])사용
     // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Errors/is_not_iterable
     const $stationTable = document.querySelector('.station > div:last-child > table');
-    let key;
+    let staionName;
 
-    for (key of Object.keys($subway.stations)) {
+    for (staionName of Object.keys($subway.stations)) {
         $stationTable.insertAdjacentHTML('beforeend',
-                                      `
-                                      <tr>
-                                        <td>${key}</td>
+                                      `<tr>
+                                        <td>${staionName}</td>
                                         <td><button class="station-delete-button"> 삭제 </button>
                                       </tr>`);
     }
@@ -89,7 +88,7 @@ function printStationListTitle($title) {
     $station.insertAdjacentHTML('beforeend',
                                 `<div>
                                     <h2> 지하철 역 목록 </h2>
-                                    <table border="1">
+                                    <table id="station-table" border="1">
                                         <th><strong> 역 이름 </strong></th>
                                         <th><strong> 설정 </strong></th>
                                     </table>
@@ -115,7 +114,7 @@ function getStationData($subway) {
         let stationName = $stationNameInput.value;
         let checkError = checkStationName($subway, stationName);
         if (checkError !== 0) {
-            errorStationName(checkError)
+            errorStationName(checkError);
             $stationNameInput.value = '';
         }
         else {
@@ -123,6 +122,28 @@ function getStationData($subway) {
             addStationList(stationName);
         }
     })
+}
+
+function deleteStationData() {
+  const $table = document.querySelector('#station-table');
+  const $trs = $table.querySelectorAll('tbody');
+  // const $deleteBtn = document.querySelectorAll('.station-delete-button');
+  let idx;
+
+  // console.log($deleteBtn[0].parentNode.sibli);
+  // for (idx = 0; idx < $deleteBtn.length; idx++) {
+  //   $deleteBtn[idx].addEventListener('click', ({ target }) => {
+  //     console.log(target.parentNode.parentNode);
+  //   })
+  // }
+  $trs.forEach(( $tr, idx )=>{
+    const $deleteBtn = $tr.querySelector('button');
+    if ($deleteBtn !== null) {
+      console.log($tr);
+      $deleteBtn.addEventListener('click', () => {$table.deleteRow(idx)});
+    }
+    // $tr.querySelector('button').addEventListener('click', $tr.remove())
+  })
 }
 
 function stationHtml($subway) {
@@ -143,7 +164,7 @@ function stationHtml($subway) {
 
 export default function subwayMap() {
     let $subway = {
-        stations: {},
+        stations: {a:'aaa', b:'bbb', c:'ccc'},
         lines: {},
         sections: {}
     };
@@ -151,6 +172,7 @@ export default function subwayMap() {
     menuBtnClick();
     stationHtml($subway);
     getStationData($subway);
+    deleteStationData();
 }
 
 new subwayMap();
