@@ -22,9 +22,10 @@ function menuBtnClick() {
             // stationHtml();
             removeStationHidden();
         }
-        // else if (target.id === 'line-manager-button') {
-        //     //line part
-        // }
+        else if (target.id === 'line-manager-button') {
+            //line part
+            setStationHidden();
+        }
         // else if (target.id === 'section-manager-button') {
         //     //section part
         // }
@@ -132,18 +133,17 @@ function deleteStationList($subway) {
 
   $stationTableLists.forEach(($list, idx) => {
     const $deleteBtn = $list.querySelector('button');
-    console.log($list);
+
     if ($deleteBtn !== null) {
       $deleteBtn.addEventListener('click', () => {
-        let deleteStationName = $list.querySelector('td:first-child').innerHTML;
-        console.log(deleteStationName);
-        $stationTable.deleteRow(idx);
-        delete $subway.stations[deleteStationName];
-        console.log($subway);
+        if (!alert('정말로 삭제하시겠습니까?')) {
+          let deleteStationName = $list.querySelector('td:first-child').innerHTML;
+          $stationTable.deleteRow(idx);
+          delete $subway.stations[deleteStationName];
+        }
       });
     }
   })
-
 }
 
 function stationHtml($subway) {
@@ -155,24 +155,36 @@ function stationHtml($subway) {
                     <input type="text" id="station-name-input" 
                         placeholder="역 이름을 입력해주세요">
                     <button id="station-add-button">역 추가</button>
-                </div>`
-        );
+                </div>`);
     printStationListTitle($title);
     printStationList($subway, $title);
     setStationHidden();
 }
 
+function makeStation($subway) {
+  stationHtml($subway);
+  getStationData($subway);
+  deleteStationList($subway);
+}
+
+function makeMenu() {
+  makeMenuBtn();
+  menuBtnClick();
+}
+
+function playSubwayMap() {
+  let $subway = {
+    stations: {a:'aaa', b:'bbb', c:'ccc'},
+    lines: {},
+    section: {}
+  }
+  makeMenu();
+  makeStation($subway);
+}
+
+
 export default function subwayMap() {
-    let $subway = {
-        stations: {a:'aaa', b:'bbb', c:'ccc'},
-        lines: {},
-        sections: {}
-    };
-    makeMenuBtn();
-    menuBtnClick();
-    stationHtml($subway);
-    getStationData($subway);
-    deleteStationList($subway);
+  playSubwayMap()
 }
 
 new subwayMap();
