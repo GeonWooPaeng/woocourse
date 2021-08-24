@@ -1,5 +1,70 @@
 # 🚇 지하철 노선도 미션
 
+----------------------------
+
+## gpaeng 계획
+
+- ## 큰틀
+  - MenuButton을 누르면 해당 html, list가 나오는 구조 (다른 메뉴버튼 누를때마다 전체 list값 update)
+  - 역에 dataset으로 번호를 부여해서 순서를 정해줍니다.
+  - hidden을 사용해서 html 숨기기
+  - insertAdjacent('beforeend',) 이용해서 html 추가
+  - dataset 사용
+  
+- ## 해야 될 것
+  
+- [ ] ### menuBtn
+  - [ ] menu (html) - id
+  - [ ] menuBtn을 눌렀을 때 해당 값 나오게 하기(target이용)
+  
+- [ ] ### station(1. 역 관리)
+  - [ ] 역 이름, 역 입력(html)
+    - [ ] 중복된 역이름 등록 X
+    - [ ] 지하철 역글자 2자 이상
+    - [ ] localStorage에 저장
+    - [ ] data id 저장
+    - [ ] id, class 값 잘 넣어주기
+
+  - [ ] 역 조회
+    - [ ] 역 조회 html 제작
+    - [ ] localStorage를 이용해서 data 받아오기(html table 사용)
+    - [ ] 삭제 button 설정
+      - [ ] localStorage에서 삭제
+      - [ ] window.confirm 출력
+      - [ ] 노선에 등록된 역일시 삭제 불가
+
+- [ ] ### line(2. 노선 관리)
+  - [ ] 노선이름, 입력 html
+    - [ ] 중복된 지하철 노선 이름 등록 X
+  - [ ] 상행 종점, 하행 종점 html
+    - [ ] localStorage 값
+  - [ ] 노선 추가 html
+  - [ ] id, class 값 잘 넣어주기
+
+  - [ ] 노선 조회
+    - [ ] 노선이름, 상행종점역, 하행 종점역, 설정 (html)
+    - [ ] 삭제 button 생성
+  
+- [ ] ### section(3. 구간 관리)
+  - [ ] 구간 수정 노선 (html)
+  - [ ] id, class 값 잘 넣어주기
+
+  - [ ] 구간 추가 기능(노선에 역을 추가하는 기능) -> 구간(역과 역 사이), 노선(이 구간들의 모음)
+    - [ ] 하나의 역은 여러개의 노선에 추가 될 수 있다.
+    - [ ] 역과 역 사이에 새로운 역이 추가 될 수 있다.
+    - [ ] 노선에서 갈래길은 생길 수 없다.
+
+  - [ ] 구간 삭제 기능
+    - [ ] 노선에 등록된 역을 제거할 수 있다.
+    - [ ] 종점을 제거할 경우 다음 역이 종점이 된다.
+    - [ ] 노선에 포함된 역이 두개 이하일 때는 역을 제거할 수 없다.
+
+- [ ] ### map-print(4. 지하철 노선도 출력)
+  - [ ] 노선의 상행 종점부터 하행 종점까지 연결된 순서대로 역 목록 출력
+
+
+-------------------------
+
 ## 🚀 기능 요구사항
 
 ### 지하철 역 관련 기능
@@ -112,3 +177,5 @@
 - **기능을 구현하기 전에 javascript-subway-precourse/docs/README.md 파일에 구현할 기능 목록**을 정리해 추가한다.
 - **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가**한다.
 - [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
+
+
