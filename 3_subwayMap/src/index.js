@@ -4,7 +4,7 @@
 import makeMenu from "./menu/makeMenu.js";
 
 export default function subwayMap() {
-  makeMenu();
+  // makeMenu();
 }
 
 new subwayMap();
