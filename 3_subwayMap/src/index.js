@@ -40,11 +40,11 @@ function inputStationName() {
     if(!(errorStationName($stationNames, $stationName))) {
       addStationName($stationNames, $stationName);
       printStationList($stationNames);
-      deleteStationName();
       // console.log(localStorage);
       // localStorage.clear();
     }
   })
+  deleteStationName();
 }
 
 export default function subwayMap() {
