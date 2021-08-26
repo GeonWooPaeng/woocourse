@@ -13,24 +13,23 @@
   
 - ## 해야 될 것
   
-- [ ] ### menuBtn
-  - [ ] menu (html) - id
-  - [ ] menuBtn을 눌렀을 때 해당 값 나오게 하기(target이용)
+- [x] ### menuBtn
+  - [x] menu (html) - id
+  - [x] menuBtn을 눌렀을 때 해당 값 나오게 하기(target이용)
   
 - [ ] ### station(1. 역 관리)
-  - [ ] 역 이름, 역 입력(html)
-    - [ ] 중복된 역이름 등록 X
-    - [ ] 지하철 역글자 2자 이상
-    - [ ] localStorage에 저장
-    - [ ] data id 저장
-    - [ ] id, class 값 잘 넣어주기
+  - [x] 역 이름, 역 입력(html)
+    - [x] 중복된 역이름 등록 X
+    - [x] 지하철 역글자 2자 이상
+    - [x] localStorage에 저장
+    - [x] dataset 사용
 
   - [ ] 역 조회
-    - [ ] 역 조회 html 제작
-    - [ ] localStorage를 이용해서 data 받아오기(html table 사용)
+    - [x] 역 조회 html 제작
+    - [x] localStorage를 이용해서 data 받아오기(html table 사용)
     - [ ] 삭제 button 설정
-      - [ ] localStorage에서 삭제
-      - [ ] window.confirm 출력
+      - [x] localStorage에서 삭제
+      - [x] window.confirm 출력
       - [ ] 노선에 등록된 역일시 삭제 불가
 
 - [ ] ### line(2. 노선 관리)
