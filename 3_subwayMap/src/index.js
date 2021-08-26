@@ -49,9 +49,8 @@ function inputStationName() {
 
 export default function subwayMap() {
   menuBtnClick();
-  inputStationName();
   printStationList();
-  deleteStationName();
+  inputStationName();
 }
 
 new subwayMap();
