@@ -20,11 +20,9 @@ export default function inputStationName() {
 
     if(!(errorStationName($stationNames, $stationName))) {
       addStationName($stationNames, $stationName);
-      printStationList();
-      deleteStationName();
-      // console.log(localStorage);
       // localStorage.clear();
     }
+    printStationList();
+    deleteStationName();
   })
-  deleteStationName();
 }

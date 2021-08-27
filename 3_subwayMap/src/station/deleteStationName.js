@@ -1,10 +1,8 @@
-import printStationList from "./printStationList.js";
-
 function deleteTableHtml($dataID) {
   let $stationLists = document.querySelectorAll('.station-list > tbody > tr');
 
   $stationLists.forEach(($stationList) => {
-    if ($stationList.dataset.id === $dataID) {
+    if ($stationList.dataset.stationId === $dataID) {
       $stationList.remove();
     }
   })
@@ -14,7 +12,7 @@ function findDeleteStationName($dataID) {
   let $stationLists = document.querySelectorAll('.station-list > tbody > tr > td');
   
   for (let i = 0; i < $stationLists.length; i++) {
-    if ($stationLists[i].dataset.id === $dataID) {
+    if ($stationLists[i].dataset.stationId === $dataID) {
       return $stationLists[i].innerText;
     }
   }
@@ -34,8 +32,8 @@ export default function deleteStationName() {
   $stationDeleteBtns.forEach(($stationDeleteBtn) => {
     $stationDeleteBtn.addEventListener('click', () => {
       if (window.confirm('정말로 삭제하시겠습니까?')) {
-        DeleteStationNameTolocalStorage($stationDeleteBtn.dataset.id);
-        deleteTableHtml($stationDeleteBtn.dataset.id);
+        DeleteStationNameTolocalStorage($stationDeleteBtn.dataset.stationId);
+        deleteTableHtml($stationDeleteBtn.dataset.stationId);
       }});
     })
   }

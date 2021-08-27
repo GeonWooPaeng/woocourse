@@ -1,3 +1,5 @@
+import init from "../init.js";
+
 function setHtmlHiddenAll() {
     const $containers = document.querySelectorAll(".subway-container > div");
     $containers.forEach(( $container ) => {
@@ -26,6 +28,7 @@ export default function menuBtnClick() {
             //map print part
             document.querySelector('.map-print-container').removeAttribute('hidden');
         }
+        init();
     })
 }
 

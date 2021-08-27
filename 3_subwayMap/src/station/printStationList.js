@@ -15,9 +15,9 @@ export default function printStationList() {
   if ($stationNames !== null) {
     $stationNames.forEach((stationName) => {
       $stationList.insertAdjacentHTML('beforeend',
-                                          `<tr data-id=${stationDataID}>
-                                            <td data-id=${stationDataID}>${stationName}</td>
-                                            <td><button class="station-delete-button" data-id=${stationDataID}> 삭제 </button></td>
+                                          `<tr data-station-id=${stationDataID}>
+                                            <td data-station-id=${stationDataID}>${stationName}</td>
+                                            <td><button class="station-delete-button" data-station-id=${stationDataID}> 삭제 </button></td>
                                           </tr>`)
       stationDataID += 1;
     });
