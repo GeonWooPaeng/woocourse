@@ -35,6 +35,7 @@ function errorLine($lineName) {
   let keys = Object.keys(localStorage);
 
   if (keys.includes($lineName)) {
+    window.alert('이미 있는 라인 입니다.');
     return (0);
   }
   return (1);
@@ -63,7 +64,7 @@ function printLineListTitle($lineLists) {
 
 function printLineList() {
   const $lineLists = document.querySelector('.line-list');
-  let keys = Object.keys(localStorage);
+  let keys = Object.keys(localStorage).sort();
   let lineDataID = 0;
 
   printLineListTitle($lineLists);
@@ -103,6 +104,7 @@ function inputLine() {
 export default function init() {
     printStationList();
     inputStationName();
+    printLineList();
     inputLine();
     // localStorage.clear();
   }
