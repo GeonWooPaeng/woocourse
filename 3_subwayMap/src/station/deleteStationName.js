@@ -31,6 +31,7 @@ export default function deleteStationName() {
 
   $stationDeleteBtns.forEach(($stationDeleteBtn) => {
     $stationDeleteBtn.addEventListener('click', () => {
+      console.log($stationDeleteBtn);
       if (window.confirm('정말로 삭제하시겠습니까?')) {
         DeleteStationNameTolocalStorage($stationDeleteBtn.dataset.stationId);
         deleteTableHtml($stationDeleteBtn.dataset.stationId);
