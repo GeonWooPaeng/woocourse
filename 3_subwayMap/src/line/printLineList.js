@@ -21,7 +21,7 @@ export default function printLineList() {
                                       `<tr>
                                         <td data-line-id="${lineDataID}">${key}</td>
                                         <td data-line-id="${lineDataID}">${$lineNames[0]}</td>
-                                        <td data-line-id="${lineDataID}">${$lineNames[0]}</td>
+                                        <td data-line-id="${lineDataID}">${$lineNames[$lineNames.length - 1]}</td>
                                         <td><button class="line-delete-button" data-line-id="${lineDataID}">삭제</td>
                                       </tr>`)
       lineDataID += 1;
