@@ -24,4 +24,5 @@ export default function inputStationName() {
     printStationList();
     deleteStationName();
   })
+  deleteStationName();
 }

@@ -18,7 +18,7 @@ function findDeleteStationName($dataID) {
   }
 }
 
-function DeleteStationNameTolocalStorage($dataID) {
+function deleteStationNameTolocalStorage($dataID) {
   let $stationNames = JSON.parse(localStorage.getItem('station'));
   let $stationDeleteName = findDeleteStationName($dataID);
 
@@ -26,15 +26,33 @@ function DeleteStationNameTolocalStorage($dataID) {
   localStorage.setItem('station', JSON.stringify($stationNames));
 }
 
+function checkInTheLine($dataID) {
+  let keys = Object.keys(localStorage);
+  let $stationDeleteName = findDeleteStationName($dataID);
+  let i;
+
+  for (i = 0; i < keys.length; i++) {
+    if (keys[i] !== 'station' && keys[i] !== null) {
+      let $stationNames = JSON.parse(localStorage.getItem(keys[i]));
+      if ($stationNames.includes($stationDeleteName)) {
+        window.alert('Line에 있는 역입니다.');
+        return (1);
+      }
+    }
+  }
+  return (0);
+}
+
 export default function deleteStationName() {
   const $stationDeleteBtns = document.querySelectorAll('.station-delete-button');
 
   $stationDeleteBtns.forEach(($stationDeleteBtn) => {
     $stationDeleteBtn.addEventListener('click', () => {
-      console.log($stationDeleteBtn);
       if (window.confirm('정말로 삭제하시겠습니까?')) {
-        DeleteStationNameTolocalStorage($stationDeleteBtn.dataset.stationId);
-        deleteTableHtml($stationDeleteBtn.dataset.stationId);
+        if (!(checkInTheLine($stationDeleteBtn.dataset.stationId))){
+          deleteStationNameTolocalStorage($stationDeleteBtn.dataset.stationId);
+          deleteTableHtml($stationDeleteBtn.dataset.stationId);
+        }
       }});
     })
   }
