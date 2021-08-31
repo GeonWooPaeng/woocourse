@@ -19,12 +19,53 @@ function lineEndStationValue() {
   return value;
 }
 
+function findDeleteLineName($dataID) {
+   let $lineNames = document.querySelectorAll('.line-list > tbody > tr > td');
+
+   for (let i = 0; i < $lineNames.length; i++) {
+    if ($lineNames[i].dataset.lineId === $dataID) {
+      return $lineNames[i].innerText;
+    }
+   }
+}
+
+function deleteLineNameToLocalStorage($dataID) {
+  let $lineDeleteName = findDeleteLineName($dataID);
+
+  localStorage.removeItem($lineDeleteName);
+  console.log(localStorage);
+}
+
+function deleteLineListHTML($dataID) {
+  let $lineLists = document.querySelectorAll('.line-list > tbody > tr');
+
+  $lineLists.forEach(( $lineList ) => {
+    if ($lineList.dataset.lineId === $dataID) {
+      console.log($lineList);
+      $lineList.remove();
+    } 
+  })
+}
+
+function deleteLine() {
+  let $lineDeleteBtns = document.querySelectorAll('.line-delete-button');
+
+  $lineDeleteBtns.forEach(( $lineDeleteBtn ) => {
+    $lineDeleteBtn.addEventListener('click', () => {
+      if (window.confirm('정말로 삭제하시겠습니까?')) {
+        deleteLineNameToLocalStorage($lineDeleteBtn.dataset.lineId);
+        deleteLineListHTML($lineDeleteBtn.dataset.lineId);
+      }
+    })
+  })
+}
+
 function inputLine() {
   const $lineNameInput = document.querySelector('#line-name-input');
-  const $lineAddButton = document.querySelector('#line-add-button');
+  const $lineAddBtn = document.querySelector('#line-add-button');
   
   addLineSelector();
-  $lineAddButton.addEventListener('click', () => {
+  $lineAddBtn.addEventListener('click', () => {
     let $lineName = $lineNameInput.value;
     let $lineStartStationValue = lineStartStationValue();
     let $lineEndStationValue = lineEndStationValue();
@@ -33,8 +74,10 @@ function inputLine() {
       addLineName($lineName, $lineStartStationValue, $lineEndStationValue);
     }
     printLineList();
-    // deleteLine();
+    deleteLine();
   })
+  deleteLine();
+
 }
 
 export default function init() {

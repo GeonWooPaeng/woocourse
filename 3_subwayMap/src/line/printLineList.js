@@ -18,7 +18,7 @@ export default function printLineList() {
     let $lineNames = JSON.parse(localStorage.getItem(key));
     if (key !== 'station' && $lineNames !== null) {
       $lineLists.insertAdjacentHTML('beforeend',
-                                      `<tr>
+                                      `<tr data-line-id="${lineDataID}">
                                         <td data-line-id="${lineDataID}">${key}</td>
                                         <td data-line-id="${lineDataID}">${$lineNames[0]}</td>
                                         <td data-line-id="${lineDataID}">${$lineNames[$lineNames.length - 1]}</td>

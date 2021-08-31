@@ -1,4 +1,4 @@
-function deleteTableHtml($dataID) {
+function deleteStationListHtml($dataID) {
   let $stationLists = document.querySelectorAll('.station-list > tbody > tr');
 
   $stationLists.forEach(($stationList) => {
@@ -51,7 +51,7 @@ export default function deleteStationName() {
       if (window.confirm('정말로 삭제하시겠습니까?')) {
         if (!(checkInTheLine($stationDeleteBtn.dataset.stationId))){
           deleteStationNameTolocalStorage($stationDeleteBtn.dataset.stationId);
-          deleteTableHtml($stationDeleteBtn.dataset.stationId);
+          deleteStationListHtml($stationDeleteBtn.dataset.stationId);
         }
       }});
     })
