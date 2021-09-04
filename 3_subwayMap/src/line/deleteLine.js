@@ -20,7 +20,6 @@ function deleteLineListHTML($dataID) {
 
   $lineLists.forEach(( $lineList ) => {
     if ($lineList.dataset.lineId === $dataID) {
-      console.log($lineList);
       $lineList.remove();
     } 
   })
