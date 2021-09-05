@@ -26,7 +26,7 @@ export default function menuBtnClick() {
         }
         else if (target.id === 'map-print-manager-button') {
             //map print part
-            document.querySelector('.map-print-container').removeAttribute('hidden');
+            document.querySelector('.map').removeAttribute('hidden');
         }
         init();
     })
