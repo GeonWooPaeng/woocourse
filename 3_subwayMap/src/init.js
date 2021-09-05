@@ -17,35 +17,59 @@ function makeSectionBtnToEdit() {
   $keys.forEach(( $key ) => {
     if ($key !== 'station') {
       $sectionManagement.insertAdjacentHTML('beforeend',
-                                              `<button class="${$key}">${$key}</button>`)
+                                              `<button class="section-line-menu-button">${$key}</button>`)
     }
   })
-
 }
 
-function printSectionTitle($sectionInput, $lineName) {
+function makeSectionManagementTitle($sectionInput, $lineName) {
   $sectionInput.innerHTML = '';
   $sectionInput.insertAdjacentHTML('beforeend',
                                     `<h3>${$lineName} 관리</h3>
                                     <h4>구간 등록</h4>
-                                    <select class="${$lineName}"></select>`);
+                                    <select id="section-station-selector"></select>`);
 }
 
-function printSectionInputSelector($sectionInput, $lineName) {
-  const $sectionSelector = $sectionInput.querySelector('select');
-  let $lineNames = JSON.parse(localStorage.getItem($lineName));
+function makeSectionInputSelector($lineName) {
+  const $sectionSelector = document.querySelector('#section-station-selector');
+  let $sectionStations = JSON.parse(localStorage.getItem($lineName));
 
   $sectionSelector.innerHTML = '';
-  $lineNames.forEach(( $lineName ) => {
+  $sectionStations.forEach(( $sectionStation ) => {
     $sectionSelector.insertAdjacentHTML('beforeend',
-                                          `<option>${ $lineName }</option>`)
+                                          `<option>${ $sectionStation }</option>`)
   })
 }
 
-function printSectionInputNumber($sectionInput) {
+function makeSectionInputNumber($sectionInput) {
   $sectionInput.insertAdjacentHTML('beforeend',
-                                    `<input placeholder="순서" />
-                                    <button class="section-number-button">등록</button>`)
+                                    `<input id="section-order-input" placeholder="순서" />
+                                    <button type="number" class="section-add-button">등록</button>`)
+}
+
+function printSectionListTitle($sectionList) {
+
+  $sectionList.innerHTML = '';
+  $sectionList.insertAdjacentHTML('beforeend',
+                                    `<th><strong>순서</strong></th>
+                                    <th><strong>이름</strong></th>
+                                    <th><strong>설정</strong></th>
+                                    `)
+}
+
+function printSectionList($lineName) {
+  const $sectionStations = JSON.parse(localStorage.getItem($lineName));
+  let $sectionList = document.querySelector('.section-list');
+
+  printSectionListTitle($sectionList);
+  $sectionStations.forEach(( $sectionStation, idx ) => {
+    $sectionList.insertAdjacentHTML('beforeend',
+                                      `<tr data-section-id=${idx}>
+                                        <td data-section-id=${idx}> ${idx} </td>
+                                        <td data-section-id=${idx}> ${ $sectionStation } </td>
+                                        <td><button data-section-id=${idx} class="section-delete-button"> 노선에서 제거 </button></td>
+                                      </tr>`)
+  })
 }
 
 function selectSectionBtn() {
@@ -57,9 +81,10 @@ function selectSectionBtn() {
     $sectionBtn.addEventListener('click', () => {
       let $lineName = $sectionBtn.innerText;
 
-      printSectionTitle($sectionInput, $lineName);
-      printSectionInputSelector($sectionInput, $lineName);
-      printSectionInputNumber($sectionInput);
+      makeSectionManagementTitle($sectionInput, $lineName);
+      makeSectionInputSelector($lineName);
+      makeSectionInputNumber($sectionInput);
+      printSectionList($lineName);
       });
     })
 }
