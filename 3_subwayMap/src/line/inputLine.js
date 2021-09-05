@@ -29,7 +29,6 @@ export default function inputLine() {
     let $lineEndStationValue = lineEndStationValue();
 
     if (errorLineName($lineName)) {
-      console.log(localStorage);
       addLineName($lineName, $lineStartStationValue, $lineEndStationValue);
     }
     printLineList();
