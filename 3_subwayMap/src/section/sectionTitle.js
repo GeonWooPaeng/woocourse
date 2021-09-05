@@ -1,3 +1,27 @@
+import makeSectionManagementTitle from "./sectionManagement.js";
+import printSectionList from "./sectionList.js";
+import deleteSection from "./deleteSection.js";
+import addSection from "./addSection.js";
+
+function selectSectionBtn() {
+  const $sectionBtns = document.querySelectorAll('.section-line-menu-button');
+  const $sectionInput = document.querySelector('.section-input');
+  let $sectionLists = document.querySelector('.section-list');
+
+  $sectionInput.innerHTML = '';
+  $sectionBtns.forEach(( $sectionBtn ) => {
+    let $lineName = $sectionBtn.innerText;
+    $sectionBtn.addEventListener('click', () => {
+      makeSectionManagementTitle($sectionInput, $lineName);
+      printSectionList($lineName);
+      deleteSection($lineName);
+      addSection($lineName);
+    });
+    deleteSection($lineName);
+  })
+  $sectionLists.setAttribute('hidden',true);
+}
+
 function makeSectionTitle($sectionManagement) {
   $sectionManagement.innerHTML = '';
   $sectionManagement.insertAdjacentHTML('beforeend',
@@ -15,4 +39,5 @@ export default function makeSectionBtnToEdit() {
                                               `<button class="section-line-menu-button">${$key}</button>`)
     }
   })
+  selectSectionBtn();
 }
