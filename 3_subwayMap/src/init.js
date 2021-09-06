@@ -6,11 +6,11 @@ import makeSectionBtnToEdit from "./section/sectionTitle.js";
 import printMapTitle from "./map/printMap.js";
 
 export default function init() {
-    printStationList();
-    inputStationName();
-    printLineList();
-    inputLine();
-    makeSectionBtnToEdit();
-    printMapTitle();
-    // localStorage.clear();
-  }
+  printStationList();
+  inputStationName();
+  printLineList();
+  inputLine();
+  makeSectionBtnToEdit();
+  printMapTitle();
+  // localStorage.clear();
+}

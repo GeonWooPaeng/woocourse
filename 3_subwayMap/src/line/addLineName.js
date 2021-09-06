@@ -1,4 +1,8 @@
-export default function addLineName($lineName, $lineStartStationValue, $lineEndStationValue) {
+export default function addLineName(
+  $lineName,
+  $lineStartStationValue,
+  $lineEndStationValue
+) {
   let $lineNames = JSON.parse(localStorage.getItem($lineName));
 
   if ($lineNames === null) {

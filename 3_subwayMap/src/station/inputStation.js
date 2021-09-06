@@ -7,22 +7,22 @@ function addStationName($stationNames, $stationName) {
     $stationNames = [];
   }
   $stationNames.push($stationName);
-  localStorage.setItem('station', JSON.stringify($stationNames));
+  localStorage.setItem("station", JSON.stringify($stationNames));
 }
 
 export default function inputStationName() {
-  const $stationNameInput = document.querySelector('#station-name-input');
-  const $stationAddBtn = document.querySelector('#station-add-button');
-  
-  $stationAddBtn.addEventListener('click', () => {
-    let $stationNames = JSON.parse(localStorage.getItem('station'));
-    let $stationName = $stationNameInput.value;
+  const $stationNameInput = document.querySelector("#station-name-input");
+  const $stationAddBtn = document.querySelector("#station-add-button");
 
-    if(!(errorStationName($stationNames, $stationName))) {
+  $stationAddBtn.addEventListener("click", () => {
+    const $stationNames = JSON.parse(localStorage.getItem("station"));
+    const $stationName = $stationNameInput.value;
+
+    if (!errorStationName($stationNames, $stationName)) {
       addStationName($stationNames, $stationName);
     }
     printStationList();
     deleteStationName();
-  })
+  });
   deleteStationName();
 }
