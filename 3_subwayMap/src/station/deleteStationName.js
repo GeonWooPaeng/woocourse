@@ -1,5 +1,5 @@
 function deleteStationListHtml($dataID) {
-  const $stationLists = document.querySelectorAll(".station-list > tbody > tr");
+  const $stationLists = document.querySelectorAll('.station-list > tbody > tr');
 
   $stationLists.forEach(($stationList) => {
     if ($stationList.dataset.stationId === $dataID) {
@@ -10,7 +10,7 @@ function deleteStationListHtml($dataID) {
 
 function findDeleteStationName($dataID) {
   const $stationLists = document.querySelectorAll(
-    ".station-list > tbody > tr > td"
+    '.station-list > tbody > tr > td',
   );
 
   for (let i = 0; i < $stationLists.length; i++) {
@@ -21,11 +21,11 @@ function findDeleteStationName($dataID) {
 }
 
 function deleteStationNameTolocalStorage($dataID) {
-  const $stationNames = JSON.parse(localStorage.getItem("station"));
+  const $stationNames = JSON.parse(localStorage.getItem('station'));
   const $stationDeleteName = findDeleteStationName($dataID);
 
   $stationNames.splice($stationNames.indexOf($stationDeleteName), 1);
-  localStorage.setItem("station", JSON.stringify($stationNames));
+  localStorage.setItem('station', JSON.stringify($stationNames));
 }
 
 function checkInTheLine($dataID) {
@@ -34,10 +34,10 @@ function checkInTheLine($dataID) {
   let i;
 
   for (i = 0; i < keys.length; i++) {
-    if (keys[i] !== "station" && keys[i] !== null) {
+    if (keys[i] !== 'station' && keys[i] !== null) {
       const $stationNames = JSON.parse(localStorage.getItem(keys[i]));
       if ($stationNames.includes($stationDeleteName)) {
-        window.alert("Line에 있는 역입니다.");
+        window.alert('Line에 있는 역입니다.');
         return 1;
       }
     }
@@ -47,12 +47,12 @@ function checkInTheLine($dataID) {
 
 export default function deleteStationName() {
   const $stationDeleteBtns = document.querySelectorAll(
-    ".station-delete-button"
+    '.station-delete-button',
   );
 
   $stationDeleteBtns.forEach(($stationDeleteBtn) => {
-    $stationDeleteBtn.addEventListener("click", () => {
-      if (window.confirm("정말로 삭제하시겠습니까?")) {
+    $stationDeleteBtn.addEventListener('click', () => {
+      if (window.confirm('정말로 삭제하시겠습니까?')) {
         if (!checkInTheLine($stationDeleteBtn.dataset.stationId)) {
           deleteStationNameTolocalStorage($stationDeleteBtn.dataset.stationId);
           deleteStationListHtml($stationDeleteBtn.dataset.stationId);

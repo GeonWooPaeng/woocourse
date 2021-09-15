@@ -6,7 +6,7 @@ function deleteSectionToLocalStorage($lineName, $dataID) {
 }
 
 function deleteSectionToHtml($dataID) {
-  const $sectionLists = document.querySelectorAll(".section-list > tbody > tr");
+  const $sectionLists = document.querySelectorAll('.section-list > tbody > tr');
 
   $sectionLists.forEach(($sectionList) => {
     if ($sectionList.dataset.sectionId === $dataID) {
@@ -19,7 +19,7 @@ function checkDeleteSection($lineName) {
   const $sectionStations = JSON.parse(localStorage.getItem($lineName));
 
   if ($sectionStations.length < 3) {
-    alert("Line에 포함된 역이 2개 이하입니다.");
+    alert('Line에 포함된 역이 2개 이하입니다.');
     return 0;
   }
   return 1;
@@ -27,12 +27,12 @@ function checkDeleteSection($lineName) {
 
 export default function deleteSection($lineName) {
   const $sectionDeleteBtns = document.querySelectorAll(
-    ".section-delete-button"
+    '.section-delete-button',
   );
 
   $sectionDeleteBtns.forEach(($sectionDeleteBtn) => {
-    $sectionDeleteBtn.addEventListener("click", () => {
-      if (window.confirm("정말 삭제하시겠습니까?")) {
+    $sectionDeleteBtn.addEventListener('click', () => {
+      if (window.confirm('정말 삭제하시겠습니까?')) {
         if (checkDeleteSection($lineName)) {
           const $sectionDataID = $sectionDeleteBtn.dataset.sectionId;
           deleteSectionToLocalStorage($lineName, $sectionDataID);
