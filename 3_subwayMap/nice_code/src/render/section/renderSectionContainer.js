@@ -1,4 +1,5 @@
-import renderLineSelector from './renderLineSelect';
+import renderSelector from '../common/renderSelector.js';
+import addSectionEvent from '../../controller/section/addSectionEvent.js';
 
 function sectionListTemplate(lineList) {
   let listNumber = 0;

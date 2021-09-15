@@ -15,6 +15,7 @@ function removeStation(stationName) {
   renderStationList();
   renderSelector();
 }
+
 function checkIncludeLine(stationName) {
   const lines = JSON.parse(localStorage.getItem('lines'));
   if (lines === null) {
@@ -30,6 +31,7 @@ function checkIncludeLine(stationName) {
   }
   return removeStation(stationName);
 }
+
 function findRemoveTarget(target) {
   const $stationTable = document.querySelectorAll('.station-table-child');
   const targetNumber = target.closet('td').dataset.number;

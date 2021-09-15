@@ -12,9 +12,9 @@ function addSelectorOption(selector) {
   const stationList = stations.split(' ');
   const selectOptions = stationList
     .map((station) => optionTemplate(station))
-    .join('');
+    .join(' ');
 
-  return (selector.innerHTMl = selectOptions);
+  return (selector.innerHTML = selectOptions);
 }
 
 export default function renderSelector() {

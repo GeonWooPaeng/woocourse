@@ -11,6 +11,7 @@ function addStation(inputStationName, stations) {
     JSON.stringify(`${stations} ${inputStationName}`),
   );
 }
+
 function checkValidStationName(inputStationName) {
   const stations = JSON.parse(localStorage.getItem('stations'));
 

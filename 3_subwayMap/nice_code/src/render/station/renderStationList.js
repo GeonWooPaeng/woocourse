@@ -1,3 +1,5 @@
+import removeStationEvent from '../../controller/station/removeStationEvent.js';
+
 function stationListContainerTemplate() {
   return `<table class="station-table" border="1">
                 <tr>
