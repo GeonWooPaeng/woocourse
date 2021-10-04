@@ -1,0 +1,5 @@
+cypress 란
+https://www.js2uix.com/frontend/cypress-study-step1/
+
+cypress 실행
+https://nukeguys.github.io/dev/cypress/

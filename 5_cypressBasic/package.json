@@ -6,6 +6,9 @@
   "author": "im1 <im1@woowahan.com>",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^6.2.1"
+    "cypress": "^6.9.1"
+  },
+  "dependencies": {
+    "open": "^8.2.1"
   }
 }
