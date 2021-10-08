@@ -11,8 +11,32 @@ export default function Counter({ $app }) {
         </div>`;
   };
 
+  const countUp = () => {
+    const $countDisplay = document.querySelector(".count-display");
+    const $plusBtn = document.querySelector(".plus-button");
+    $plusBtn.addEventListener("click", () => {
+      let countValue = Number($countDisplay.value);
+      if (countValue < 12) {
+        $countDisplay.value = String(countValue + 1);
+      }
+    });
+  };
+
+  const countDown = () => {
+    const $countDisplay = document.querySelector(".count-display");
+    const $minusBtn = document.querySelector(".minus-button");
+    $minusBtn.addEventListener("click", () => {
+      let countValue = Number($countDisplay.value);
+      if (countValue > 8) {
+        $countDisplay.value = String(countValue - 1);
+      }
+    });
+  };
+
   const init = () => {
     render();
+    countUp();
+    countDown();
   };
 
   init();
