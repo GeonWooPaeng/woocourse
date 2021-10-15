@@ -1,19 +1,19 @@
 import { findOperation } from "./utils.js";
 
 const divid = ($total, nums) => {
-  return ($total.innerHTML = Math.floor(nums[0] / nums[1]));
+  return ($total.innerHTML = String(Math.floor(nums[0] / nums[1])));
 };
 
 const multi = ($total, nums) => {
-  return ($total.innerHTML = Math.floor(nums[0] * nums[1]));
+  return ($total.innerHTML = String(Math.floor(nums[0] * nums[1])));
 };
 
 const sub = ($total, nums) => {
-  return ($total.innerHTML = Math.floor(nums[0] - nums[1]));
+  return ($total.innerHTML = String(Math.floor(nums[0] - nums[1])));
 };
 
 const add = ($total, nums) => {
-  return ($total.innerHTML = Math.floor(nums[0] - nums[1]));
+  return ($total.innerHTML = String(Math.floor(nums[0] + nums[1])));
 };
 
 const checkOperations = (operation) => {
@@ -33,7 +33,7 @@ const checkOperations = (operation) => {
 const getResult = () => {
   const $total = document.querySelector("#total");
   let operation = findOperation();
-  const nums = $total.innerHTML.split(operation);
+  const nums = $total.innerHTML.split(operation).map(Number);
 
   if (operation === "/") {
     return divid($total, nums);
