@@ -27,6 +27,20 @@ const putModifiers = () => {
   $total.innerHTML = "0";
 };
 
+const checkOperations = (operation) => {
+  const $total = document.querySelector("#total");
+
+  let cnt = $total.innerHTML.split("").reduce((cnt, element) => {
+    if (isNaN(Number(element))) {
+      cnt += 1;
+    }
+    return cnt;
+  }, 0);
+  if (cnt === 0) {
+    return ($total.innerHTML += operation);
+  }
+};
+
 const getResult = () => {
   const operations = ["/", "X", "-", "+"];
   const $total = document.querySelector("#total");
@@ -36,11 +50,10 @@ const getResult = () => {
 };
 
 const putOperations = ({ target }) => {
-  const $total = document.querySelector("#total");
   if (target.innerHTML === "=") {
     return getResult();
   }
-  return ($total.innerHTML += target.innerHTML);
+  return checkOperations(target.innerHTML);
 };
 
 export default function Calculator() {
